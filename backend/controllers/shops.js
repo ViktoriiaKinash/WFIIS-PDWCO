@@ -15,14 +15,12 @@ exports.getShops = async (req, res) => {
 };
 
 exports.addShop = async (req, res) => {
-    const { name, location, space} = req.body;
+    const { name, location, space} = req.body.params;
     const session = driver.session();
     try {
         const result = await session.writeTransaction(txc =>
             txc.run(
-                'MERGE (s:Shop {name: $name}) ' +
-                'ON CREATE SET s.name =  $name, s.location = $location, s.space = $space' +
-                'RETURN s',
+                'MERGE (s:Shop {name: $name}) ON CREATE SET s.location = $location, s.space = $space RETURN s',
                 { name, location, space}
             )
         );
@@ -37,7 +35,7 @@ exports.addShop = async (req, res) => {
 };
 
 exports.deleteShop = async (req, res) => {
-    const shopName = req.params.name;
+    const shopName = req.query.name;
     const session = driver.session();
     try {
         await session.writeTransaction(txc =>

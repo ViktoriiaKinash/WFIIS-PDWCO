@@ -3,8 +3,8 @@ const driver = require('../config').driver;
 exports.getProducts = async (req, res) => {
     const session = driver.session();
     try {
-        const result = await session.readTransaction(txc => txc.run('MATCH (p:Product) RETURN p'));
-        const products = result.records.map(record => record.get('p').properties);
+        const result = await session.readTransaction(txc => txc.run('MATCH (n:Product) RETURN n'));
+        const products = result.records.map(record => record.get('n').properties);
         res.json(products);
     } catch (error) {
         res.status(500).send(error.message);
@@ -15,13 +15,13 @@ exports.getProducts = async (req, res) => {
 };
 
 exports.addProduct = async (req, res) => {
-    const { name, brand, price } = req.body;
+    const { name, brand, price } =  req.body.params;
     const session = driver.session();
     try {
         const result = await session.writeTransaction(txc =>
             txc.run(
                 'MERGE (p:Product {name: $name}) ' +
-                'ON CREATE SET p.age = $age, p.brand = $brand, p.price = $price ' +
+                'ON CREATE SET p.name = $name, p.brand = $brand, p.price = $price ' +
                 'RETURN p',
                 { name, brand, price }
             )
@@ -37,7 +37,7 @@ exports.addProduct = async (req, res) => {
 };
 
 exports.deleteProduct = async (req, res) => {
-    const productName = req.params.name;
+    const productName = req.query.name;
     const session = driver.session();
     try {
         await session.writeTransaction(txc =>

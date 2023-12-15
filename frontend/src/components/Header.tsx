@@ -6,7 +6,6 @@ import { Outlet, Link } from "react-router-dom";
 const Header = () => {
   const [current, setCurrent] = useState("r");
   const onClick = (e: { key: SetStateAction<string> }) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
   return (
