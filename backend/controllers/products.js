@@ -2,6 +2,7 @@ const driver = require('../config').driver;
 
 exports.getProducts = async (req, res) => {
     const session = driver.session();
+    console.log('here')
     try {
         const result = await session.readTransaction(txc => txc.run('MATCH (n:Product) RETURN n'));
         const products = result.records.map(record => record.get('n').properties);

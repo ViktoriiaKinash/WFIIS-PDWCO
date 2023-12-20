@@ -94,7 +94,7 @@ const Shops = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
+      render: (_: unknown, record: { name: string }) => (
         <Button
           icon={<DeleteOutlined />}
           onClick={() => deleteShop(record.name)}
