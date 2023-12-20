@@ -43,7 +43,7 @@ const Shops = () => {
 
   const addProduct = async () => {
     try {
-      const res = await axios.post(
+      await axios.post(
         (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
           "/api/addShop/",
         {
