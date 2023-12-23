@@ -13,7 +13,8 @@ const Products = () => {
   const getProducts = async () => {
     try {
       const res = await axios.get(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/getProducts/"
       );
       if (res.data.length) {
@@ -27,7 +28,8 @@ const Products = () => {
   const deleteProduct = async (name_: string) => {
     try {
       await axios.delete(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/deleteProduct/",
         {
           params: {
@@ -44,7 +46,8 @@ const Products = () => {
   const addProduct = async () => {
     try {
       const res = await axios.post(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/addProduct/",
         {
           params: {

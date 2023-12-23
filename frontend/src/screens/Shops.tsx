@@ -13,7 +13,8 @@ const Shops = () => {
   const getShops = async () => {
     try {
       const res = await axios.get(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/getShops/"
       );
       if (res.data.length) {
@@ -27,7 +28,8 @@ const Shops = () => {
   const deleteShop = async (name_: string) => {
     try {
       await axios.delete(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/deleteShop/",
         {
           params: {
@@ -44,7 +46,8 @@ const Shops = () => {
   const addProduct = async () => {
     try {
       await axios.post(
-        (import.meta.env.PUBLIC_API_URL || "http://localhost:3000") +
+        (import.meta.env.PUBLIC_API_URL ||
+          "https://app-vika-neo4j-05db03fe2392.herokuapp.com") +
           "/api/addShop/",
         {
           params: {
@@ -81,15 +84,6 @@ const Shops = () => {
       title: "Space",
       dataIndex: "space",
       key: "space",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: () => (
-        <Space size="middle">
-          <a>Delete</a>
-        </Space>
-      ),
     },
     {
       title: "Action",
